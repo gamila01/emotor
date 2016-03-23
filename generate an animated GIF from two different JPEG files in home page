@@ -1,0 +1,31 @@
+<?php
+if(isset($_POST['speed']))
+{
+    header('Content-type: image/gif');
+    if(isset($_POST['download'])){
+    header('Content-Disposition: attachment; filename="animated.gif"');
+    }
+    include('GIFEncoder.class.php');
+    function frame($image){
+        ob_start();
+        imagegif($image);
+        global $frames, $framed;
+        $frames[]=ob_get_contents();
+        $framed[]=$_POST['speed'];
+        ob_end_clean();
+    }
+    foreach ($_FILES["images"]["error"] as $key => $error)
+    {
+        if ($error == UPLOAD_ERR_OK)
+        {
+            $tmp_name = $_FILES["images"]["tmp_name"][$key];
+            $im = imagecreatefromstring(file_get_contents($tmp_name));
+            $resized = imagecreatetruecolor($_POST['width'],$_POST['height']);
+            imagecopyresized($resized, $im, 0, 0, 0, 0, $_POST['width'], $_POST['height'], imagesx($im), imagesy($im));
+            frame($resized);
+        }
+    }
+    $gif = new GIFEncoder($frames,$framed,0,2,0,0,0,'bin');
+    echo $gif->GetAnimation();
+}
+?>
