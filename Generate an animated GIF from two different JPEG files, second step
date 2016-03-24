@@ -1,0 +1,28 @@
+<form action="" method="post" enctype="multipart/form-data">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="jquery.MultiFile.js"></script>
+<script src="jquery.placeholder.js"></script>
+<input type="file" name="images[]" class="multi" />
+<script>
+    $(function(){
+        $('input[placeholder], textarea[placeholder]').placeholder();
+   });
+</script>
+   <SCRIPT language=Javascript>
+      <!--
+      function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }
+      //-->
+   </SCRIPT>
+<input name="speed" maxlength="10" type="text" placeholder="Speed of frames in ms" onkeypress="return isNumberKey(event)">
+<input name="width" maxlength="4" type="text" placeholder="Width" onkeypress="return isNumberKey(event)">
+<input name="height" maxlength="4" type="text" placeholder="Height" onkeypress="return isNumberKey(event)">
+<input type="submit" name="download" value="Download!">
+<input type="submit" name="preview" value="Preview!">
+</form>
