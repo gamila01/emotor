@@ -1,0 +1,48 @@
+ 
+
+// class SimpleLoginSystem
+
+class SimpleLoginSystem {
+
+ 
+
+    // variables
+
+    var $aExistedMembers; // Existed members array
+
+ 
+
+    // constructor
+
+    function SimpleLoginSystem() {
+
+        $this->aExistedMembers = array(
+
+            'User1' => 'd8578edf8458ce06fbc5bb76a58c5ca4',
+
+            'User2' => 'd8578edf8458ce06fbc5bb76a58c5ca4',
+
+            'User3' => 'd8578edf8458ce06fbc5bb76a58c5ca4'
+
+        );
+
+    }
+
+ 
+
+    function getLoginBox() {
+
+        ob_start();
+
+        require_once('login_form.html');
+
+        $sLoginForm = ob_get_clean();
+
+ 
+
+        $sLogoutForm = '<a href="'.$_SERVER['PHP_SELF'].'?logout=1">logout</a>';
+
+ 
+
+        if ((int)$_REQUEST['logout'] == 1) {
+
